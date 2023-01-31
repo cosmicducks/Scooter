@@ -2,8 +2,8 @@
 from discord.ext import commands, tasks
 import discord
 import string
+
 import sys
-import aiosqlite
 import asyncio
 import nest_asyncio
 import random
@@ -23,9 +23,6 @@ import re
 intents = discord.Intents.all()
 bot = commands.Bot(command_prefix='!', intents=intents)
 
-bot.load_extension("snipe")
-
-bot.load_extension("rules")
 
 
 @bot.event
@@ -33,14 +30,6 @@ async def on_ready():
     print("Scooter is online yay!!")
 
     
-
-
-
-@bot.command()
-@commands.has_role("Administrator")
-async def start_notifying(ctx):
-    checkforvideos.start()
-    await ctx.send("Now Notifying")
 
 
 msg_dump_channel = 1006225893758345316
@@ -486,6 +475,8 @@ async def rate(ctx: commands.Context, user: discord.Member):
 
 
 
+with open("token.txt") as f:
+    TOKEN = f.read().strip()
 
 keep_alive()
 my_secret = os.environ['TOKEN']
